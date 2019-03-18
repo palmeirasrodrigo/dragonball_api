@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("dragonball")
 public class DragonApiProperty {
 	
-	private String originPermitida = "http://localhost:8000";
+	private String originPermitida = "https://dragonball-api.herokuapp.com";
 	
 	private final Seguranca seguranca = new Seguranca();
 	
