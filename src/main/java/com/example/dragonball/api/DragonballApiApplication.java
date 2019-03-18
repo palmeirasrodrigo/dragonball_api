@@ -15,9 +15,5 @@ public class DragonballApiApplication {
 		SpringApplication.run(DragonballApiApplication.class, args);
 	}
 
-	public String getOriginPermitida() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

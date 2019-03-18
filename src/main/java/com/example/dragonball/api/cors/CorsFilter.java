@@ -16,14 +16,14 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.example.dragonball.api.DragonballApiApplication;
+import com.example.dragonball.api.config.property.DragonApiProperty;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter{
 
 	@Autowired
-	private DragonballApiApplication dragonApiProperty;
+	private DragonApiProperty dragonApiProperty;
 
 	
 	@Override
