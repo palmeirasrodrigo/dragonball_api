@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -77,6 +78,19 @@ public class AlternativasResource {
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, alternativasSalva.getCodigo()));
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(alternativasSalva);
+	}
+	
+	
+	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALTERNATIVAS')")
+	public ResponseEntity<Alternativas> atualizar(@PathVariable Long codigo, @Valid @RequestBody Alternativas alternativas) {
+		try {
+			
+			Alternativas usuarioSalvo = alternativasService.atualizar(codigo, alternativas);
+			return ResponseEntity.ok(usuarioSalvo);
+		}catch (IllegalArgumentException e) {
+			return ResponseEntity.notFound().build();
+}
 	}
 	
 	@GetMapping("/{codigo}")
