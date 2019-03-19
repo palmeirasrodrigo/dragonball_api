@@ -1,1 +1,0 @@
-INSERT INTO usuario (nome, email, senha, pontos) values ('Rodrigo Negrão', 'palmeiraselicia@hotmail.com', '$10$bHE/zaRXq9DhZA6P9BWNvOQI2rADIvQzGCKrx3Ji9W0xIMmchr5ZW', 10);
