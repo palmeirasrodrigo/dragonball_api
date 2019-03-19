@@ -1,4 +1,4 @@
-package com.example.dragonball.api.token;
+package com.example.dragonball.api.config.token;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +10,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
 import com.example.dragonball.api.security.UsuarioSistema;
 
-
-public class CustomTokenEnhancer implements TokenEnhancer {
-
+public class CustomTokenEnhancer implements TokenEnhancer{
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 		UsuarioSistema usuarioSistema = (UsuarioSistema) authentication.getPrincipal();
@@ -24,6 +22,5 @@ public class CustomTokenEnhancer implements TokenEnhancer {
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(addInfo);
 		return accessToken;
 	}
-
 
 }
