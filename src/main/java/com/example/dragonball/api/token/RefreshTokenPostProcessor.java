@@ -20,11 +20,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.example.dragonball.api.config.property.DragonApiProperty;
 
 @ControllerAdvice
-public class RefeshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken>{
-
+public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
+	
 	@Autowired
-	private DragonApiProperty dragonballApiProperty;
-		
+	private DragonApiProperty algamoneyApiProperty;
+
 	@Override
 	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
 		return returnType.getMethod().getName().equals("postAccessToken");
@@ -37,12 +37,13 @@ public class RefeshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Access
 
 		HttpServletRequest req = ((ServletServerHttpRequest) request).getServletRequest();
 		HttpServletResponse resp = ((ServletServerHttpResponse) response).getServletResponse();
-		
+
 		DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) body;
-		
+
 		String refreshToken = body.getRefreshToken().getValue();
 		adicionarRefreshTokenNoCookie(refreshToken, req, resp);
 		removerRefreshTokenDoBody(token);
+
 		return body;
 	}
 
@@ -51,10 +52,9 @@ public class RefeshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Access
 	}
 
 	private void adicionarRefreshTokenNoCookie(String refreshToken, HttpServletRequest req, HttpServletResponse resp) {
-
 		Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
 		refreshTokenCookie.setHttpOnly(true);
-		refreshTokenCookie.setSecure(dragonballApiProperty.getSeguranca().isEnableHttps()); 
+		refreshTokenCookie.setSecure(algamoneyApiProperty.getSeguranca().isEnableHttps());
 		refreshTokenCookie.setPath(req.getContextPath() + "/oauth/token");
 		refreshTokenCookie.setMaxAge(2592000);
 		resp.addCookie(refreshTokenCookie);

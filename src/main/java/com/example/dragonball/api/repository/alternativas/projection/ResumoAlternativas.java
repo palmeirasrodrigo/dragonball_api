@@ -1,4 +1,4 @@
-package com.example.dragonball.api.repository.projection;
+package com.example.dragonball.api.repository.alternativas.projection;
 
 public class ResumoAlternativas {
 	

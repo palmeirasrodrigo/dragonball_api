@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dragonball.api.event.RecursoCriadoEvent;
 import com.example.dragonball.api.model.Usuario;
-import com.example.dragonball.api.repository.UsuarioRepository;
-import com.example.dragonball.api.service.PessoaService;
+import com.example.dragonball.api.repository.usuario.UsuarioRepository;
+import com.example.dragonball.api.service.pessoa.PessoaService;
 
 @RestController
 @RequestMapping("/usuario")

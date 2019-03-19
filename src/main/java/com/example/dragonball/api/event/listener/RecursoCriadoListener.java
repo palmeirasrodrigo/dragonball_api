@@ -11,20 +11,25 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.dragonball.api.event.RecursoCriadoEvent;
 
 @Component
-public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoEvent>{
+public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoEvent> {
+
+	//@Resource
+	//private WebServiceContext context;
 
 	@Override
-	public void onApplicationEvent(RecursoCriadoEvent recursoCriadoEvent) {
-		HttpServletResponse response = recursoCriadoEvent.getResponse();
-		Long codigo = recursoCriadoEvent.getCodigo();
-		
-		adicionarHeaderLocation(response, codigo);
-		
-	}
+	public void onApplicationEvent(RecursoCriadoEvent event) {
 
-	private void adicionarHeaderLocation(HttpServletResponse response, Long codigo) {
+		HttpServletResponse response = event.getResponse();
+		long codigo = event.getCodigo();
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(codigo).toUri();
 		response.setHeader("Location", uri.toASCIIString());
 	}
+
+//	public void getHttpServletResponse() {		
+//		MessageContext msgCtxt = context.getMessageContext();
+//		HttpServletResponse req = (HttpServletResponse) msgCtxt.get(MessageContext.SERVLET_RESPONSE);
+//		
+//	}
 
 }

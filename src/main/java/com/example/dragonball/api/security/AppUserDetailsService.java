@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.dragonball.api.model.Usuario;
-import com.example.dragonball.api.repository.UsuarioRepository;
+import com.example.dragonball.api.repository.usuario.UsuarioRepository;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {

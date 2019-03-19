@@ -27,14 +27,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dragonball.api.event.RecursoCriadoEvent;
-import com.example.dragonball.api.exceptionhandler.DragonExceptionHandler.Erro;
+import com.example.dragonball.api.exception.PessoaInexistenteOuInativaException;
+import com.example.dragonball.api.exception.handle.AlgaMoneyExceptionHandler.Erro;
 import com.example.dragonball.api.model.Alternativas;
-import com.example.dragonball.api.repository.AlternativasRepository;
-import com.example.dragonball.api.repository.filter.AlternativasFilter;
-import com.example.dragonball.api.repository.projection.MostrarSeries;
-import com.example.dragonball.api.repository.projection.ResumoAlternativas;
-import com.example.dragonball.api.service.AlternativasService;
-import com.example.dragonball.api.service.exception.UsuarioInexistente;
+import com.example.dragonball.api.repository.alternativas.AlternativasRepository;
+import com.example.dragonball.api.repository.alternativas.filter.AlternativasFilter;
+import com.example.dragonball.api.repository.alternativas.projection.MostrarSeries;
+import com.example.dragonball.api.repository.alternativas.projection.ResumoAlternativas;
+import com.example.dragonball.api.service.alternativas.AlternativasService;
 
 @RestController
 @RequestMapping("/alternativas")
@@ -73,7 +73,7 @@ public class AlternativasResource {
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALTERNATIVAS')")
 	public ResponseEntity<Alternativas> criar(@Valid @RequestBody Alternativas alternativas, HttpServletResponse response) {
-		Alternativas alternativasSalva = alternativasService.salvar(alternativas);
+		Alternativas alternativasSalva = alternativasService.criar(alternativas);
 		
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, alternativasSalva.getCodigo()));
 		
@@ -107,8 +107,8 @@ public class AlternativasResource {
 		alternativasService.remover(codigo);
 	}
 	
-	@ExceptionHandler({UsuarioInexistente.class})
-	public ResponseEntity<Object>handleUsuarioInexistente(UsuarioInexistente ex) {
+	@ExceptionHandler({PessoaInexistenteOuInativaException.class})
+	public ResponseEntity<Object>handleUsuarioInexistente(PessoaInexistenteOuInativaException ex) {
 		String mensagemUsuario = messageSource.getMessage("pessoa.inexistente", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));

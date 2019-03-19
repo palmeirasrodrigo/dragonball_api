@@ -1,15 +1,13 @@
-package com.example.dragonball.api.repository.projection;
+package com.example.dragonball.api.repository.alternativas.filter;
 
 import com.example.dragonball.api.model.TipoSerie;
 
-public class MostrarSeries {
+public class AlternativasFilter {
 	
 	private TipoSerie serie;
 
-	public MostrarSeries(TipoSerie serie) {
-		this.serie = serie;
-	}
-
+		
+	
 	public TipoSerie getSerie() {
 		return serie;
 	}
@@ -18,5 +16,5 @@ public class MostrarSeries {
 		this.serie = serie;
 	}
 	
-	
+		
 }

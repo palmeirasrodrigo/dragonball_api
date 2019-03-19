@@ -2,32 +2,29 @@ package com.example.dragonball.api.config.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+
 @ConfigurationProperties("dragonball")
 public class DragonApiProperty {
 	
-	private String originPermitida = "*";
-	
+
+	private String originPermitida = "http://localhost:8000";
+
 	private final Seguranca seguranca = new Seguranca();
 	
-		
 	public String getOriginPermitida() {
 		return originPermitida;
 	}
 
-
 	public void setOriginPermitida(String originPermitida) {
 		this.originPermitida = originPermitida;
 	}
-
-
-
+		
 	public Seguranca getSeguranca() {
 		return seguranca;
 	}
 
+	public static class Seguranca {
 
-
-	public static class Seguranca{
 		private boolean enableHttps;
 
 		public boolean isEnableHttps() {
@@ -37,7 +34,7 @@ public class DragonApiProperty {
 		public void setEnableHttps(boolean enableHttps) {
 			this.enableHttps = enableHttps;
 		}
-		
-		
+
 	}
+
 }

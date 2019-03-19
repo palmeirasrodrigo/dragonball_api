@@ -15,19 +15,20 @@ import com.example.dragonball.api.config.property.DragonApiProperty;
 @RestController
 @RequestMapping("/tokens")
 public class TokenResource {
-
-	@Autowired
-	private DragonApiProperty dragonballApiProperty;
 	
+	@Autowired
+	private DragonApiProperty algamoneyApiProperty;
+
 	@DeleteMapping("/revoke")
 	public void revoke(HttpServletRequest req, HttpServletResponse resp) {
 		Cookie cookie = new Cookie("refreshToken", null);
 		cookie.setHttpOnly(true);
-		cookie.setSecure(dragonballApiProperty.getSeguranca().isEnableHttps());
+		cookie.setSecure(algamoneyApiProperty.getSeguranca().isEnableHttps());
 		cookie.setPath(req.getContextPath() + "/oauth/token");
 		cookie.setMaxAge(0);
 		
 		resp.addCookie(cookie);
 		resp.setStatus(HttpStatus.NO_CONTENT.value());
 	}
+
 }
