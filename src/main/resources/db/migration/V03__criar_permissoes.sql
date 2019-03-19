@@ -13,9 +13,9 @@ FOREIGN KEY (codigo_permissao) REFERENCES permissao(codigo)
 
 INSERT INTO permissao (codigo, descricao) values (1, 'ROLE_CADASTRAR_ALTERNATIVAS');
 INSERT INTO permissao (codigo, descricao) values (2, 'ROLE_REMOVER_ALTERNATIVAS');
-INSERT INTO permissao (codigo, descricao) values (2, 'ROLE_LISTAR_USUARIOS');
-INSERT INTO permissao (codigo, descricao) values (2, 'ROLE_DELETAR_USUARIOS');
-INSERT INTO permissao (codigo, descricao) values (2, 'ROLE_ATUALIZAR_USUARIOS');
+INSERT INTO permissao (codigo, descricao) values (3, 'ROLE_LISTAR_USUARIOS');
+INSERT INTO permissao (codigo, descricao) values (4, 'ROLE_DELETAR_USUARIOS');
+INSERT INTO permissao (codigo, descricao) values (5, 'ROLE_ATUALIZAR_USUARIOS');
 
 -- ADMIN
 
