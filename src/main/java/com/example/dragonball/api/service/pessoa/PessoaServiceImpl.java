@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.dragonball.api.model.Usuario;
@@ -68,8 +69,9 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public void atualizarSenha(long codigo, String senha) {
-		// TODO Auto-generated method stub
-		
+		Usuario usuario = buscarPessoaPeloCodigo(codigo);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		encoder.encode(usuario.getSenha());		
 	}
 
 	@Override
