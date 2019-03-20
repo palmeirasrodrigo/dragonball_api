@@ -25,6 +25,6 @@ public interface PessoaService {
 
 	void atualizarSenha(long codigo, String senha);
 
-	void atualizarPontos(Long codigo, int pontos);
+	Usuario atualizarPontos(Long codigo, int pontos);
 
 }

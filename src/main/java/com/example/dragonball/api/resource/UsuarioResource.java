@@ -78,7 +78,8 @@ public class UsuarioResource {
 	
 	@PutMapping("/{codigo}/pontos")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void atualizarPontos(@PathVariable Long codigo, @RequestBody int pontos) {
-		usuarioService.atualizarPontos(codigo, pontos);
+	public ResponseEntity<Usuario> atualizarPontos(@PathVariable Long codigo, @RequestBody int pontos) {
+		Usuario usuarioSalvo = usuarioService.atualizarPontos(codigo, pontos);
+		return ResponseEntity.ok(usuarioSalvo);
 	}
 }
