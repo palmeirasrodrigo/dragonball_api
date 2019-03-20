@@ -38,8 +38,9 @@ public class UsuarioResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
+	//@PreAuthorize("hasAuthority('ROLE_LISTAR_USUARIOS')")
+	
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_LISTAR_USUARIOS')")
 	public List<Usuario> listar() {
 		return usuarioRepository.findAll();
 	}
@@ -53,9 +54,9 @@ public class UsuarioResource {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
 	}  
+	//@PreAuthorize("hasAuthority('ROLE_LISTAR_USUARIOS')")
 	
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_LISTAR_USUARIOS')")
 	public ResponseEntity<Usuario> buscarPeloCodigo(@PathVariable Long codigo) {
 		 Usuario findOne = usuarioRepository.findOne(codigo);
 		 return findOne != null ? ResponseEntity.ok(findOne): ResponseEntity.notFound().build();
@@ -70,8 +71,9 @@ public class UsuarioResource {
 		usuarioRepository.delete(codigo);
 	}
 	
+	//@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_USUARIOS')")
+	
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_USUARIOS')")
 	public ResponseEntity<Usuario> atualizar(@PathVariable Long codigo, @Valid @RequestBody Usuario usuario) {
 		Usuario usuarioSalvo = usuarioService.atualizar(codigo, usuario);
 		return ResponseEntity.ok(usuarioSalvo);
