@@ -62,7 +62,8 @@ public class UsuarioResource {
 				 
 	}
 	
-	@PreAuthorize("hasAuthority('ROLE_DELETAR_USUARIOS')")
+	//@PreAuthorize("hasAuthority('ROLE_DELETAR_USUARIOS')")
+	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
