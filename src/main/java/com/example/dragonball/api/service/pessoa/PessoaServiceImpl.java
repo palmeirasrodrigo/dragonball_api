@@ -76,9 +76,9 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public void atualizarPontos(Long codigo, int pontos) {
-		Usuario usuario = buscarPessoaPeloCodigo(codigo);
+		/*Usuario usuario = buscarPessoaPeloCodigo(codigo);
 		int total = usuario.getPontos() + pontos;
-		usuario.setPontos(total);
+		usuario.setPontos(total);*/
 	}
 	
 }
