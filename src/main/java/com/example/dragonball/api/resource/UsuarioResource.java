@@ -70,7 +70,7 @@ public class UsuarioResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_USUARIOS')")
+	//@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_USUARIOS')")
 	public ResponseEntity<Usuario> atualizar(@PathVariable Long codigo, @Valid @RequestBody Usuario usuario) {
 		Usuario usuarioSalvo = usuarioService.atualizar(codigo, usuario);
 		return ResponseEntity.ok(usuarioSalvo);
