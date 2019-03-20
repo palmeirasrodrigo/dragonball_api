@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dragonball.api.model.Alternativas;
 import com.example.dragonball.api.repository.alternativas.filter.AlternativasFilter;
+import com.example.dragonball.api.repository.alternativas.projection.MostrarSeries;
 import com.example.dragonball.api.repository.alternativas.projection.ResumoAlternativas;
 
 @Service
@@ -19,6 +20,8 @@ public interface AlternativasService {
 
 	Page<ResumoAlternativas> resumo(AlternativasFilter lancamentoFilter, Pageable pageable);
 
+	Page<MostrarSeries> serie(AlternativasFilter lancamentoFilter, Pageable pageable);
+	
 	Alternativas buscarPeloCodigo(long codigo);
 
 	void remover(long codigo);

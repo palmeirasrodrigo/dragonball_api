@@ -10,6 +10,7 @@ import com.example.dragonball.api.model.Alternativas;
 import com.example.dragonball.api.model.Usuario;
 import com.example.dragonball.api.repository.alternativas.AlternativasRepository;
 import com.example.dragonball.api.repository.alternativas.filter.AlternativasFilter;
+import com.example.dragonball.api.repository.alternativas.projection.MostrarSeries;
 import com.example.dragonball.api.repository.alternativas.projection.ResumoAlternativas;
 import com.example.dragonball.api.service.pessoa.PessoaService;
 
@@ -35,6 +36,11 @@ public class AlternativasServiceImpl implements AlternativasService {
 	public Page<ResumoAlternativas> resumo(AlternativasFilter lancamentoFilter, Pageable pageable) {		
 		return lancamentoRepository.resumir(lancamentoFilter, pageable);
 	}
+
+	@Override
+	public Page<MostrarSeries> serie(AlternativasFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.series(lancamentoFilter, pageable);
+	}	
 
 	@Override
 	public Alternativas buscarPeloCodigo(long codigo) {		
@@ -72,6 +78,7 @@ public class AlternativasServiceImpl implements AlternativasService {
 			throw new IllegalArgumentException();
 		}
 		return lancamentoSalvo;
-	}	
+	}
+
 	
 }
