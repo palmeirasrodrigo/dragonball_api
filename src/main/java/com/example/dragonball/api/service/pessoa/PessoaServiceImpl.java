@@ -71,8 +71,8 @@ public class PessoaServiceImpl implements PessoaService {
 	public void atualizarSenha(long codigo, String senha) {
 		Usuario usuario = buscarPessoaPeloCodigo(codigo);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		encoder.encode(usuario.getSenha());		
-	}
+		usuario.setSenha(encoder.encode(usuario.getSenha()));
+		}
 
 	@Override
 	public void atualizarPontos(Long codigo, int pontos) {
