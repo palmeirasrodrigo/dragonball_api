@@ -6,8 +6,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,35 +19,35 @@ public class Alternativas {
 	private long codigo;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String titulo;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String link;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String pergunta;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String alternativa1;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String alternativa2;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String alternativa3;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String alternativa4;
 	
 	@NotNull
-	@Size(min=3, max = 50)
+	@Size(min=3, max = 550)
 	private String resposta;
 	
 	@NotNull
@@ -60,9 +58,15 @@ public class Alternativas {
 	private TipoSerie tipo;
 	
 	@NotNull
-	@ManyToOne
-	@JoinColumn(name="codigo_usuario")
-	private Usuario usuario;
+	private int episodio;
+	
+	@NotNull
+	private int esfera;
+	
+	//@NotNull
+	//@ManyToOne
+	//@JoinColumn(name="codigo_usuario")
+	//private Usuario usuario;
 	
 	public long getCodigo() {
 		return codigo;
@@ -135,13 +139,29 @@ public class Alternativas {
 	public void setTipo(TipoSerie tipo) {
 		this.tipo = tipo;
 	}
-	public Usuario getUsuario() {
-		return usuario;
+	//public Usuario getUsuario() {
+		//return usuario;
+	//}
+	//public void setUsuario(Usuario usuario) {
+		//this.usuario = usuario;
+	//}
+	
+		
+	public int getEpisodio() {
+		return episodio;
 	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setEpisodio(int episodio) {
+		this.episodio = episodio;
 	}
 	
+	
+	
+	public int getEsfera() {
+		return esfera;
+	}
+	public void setEsfera(int esfera) {
+		this.esfera = esfera;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

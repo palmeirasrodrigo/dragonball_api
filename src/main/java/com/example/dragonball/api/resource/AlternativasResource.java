@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +35,7 @@ import com.example.dragonball.api.repository.alternativas.projection.MostrarSeri
 import com.example.dragonball.api.repository.alternativas.projection.ResumoAlternativas;
 import com.example.dragonball.api.service.alternativas.AlternativasService;
 
+
 @RestController
 @RequestMapping("/alternativas")
 public class AlternativasResource {
@@ -53,8 +53,18 @@ public class AlternativasResource {
 	private AlternativasService alternativasService;
 	
 	@GetMapping
-	public Page<Alternativas> pesquisar(AlternativasFilter alternativasFilter, Pageable pageable) {
-		return alternativasRepository.filtrar(alternativasFilter, pageable);
+	public List<Alternativas> listar() {
+		return alternativasRepository.findAll();
+	}
+	
+	@GetMapping("/pesquisar")
+	public List<Alternativas> pesquisar(AlternativasFilter alternativasFilter) {
+		return alternativasRepository.filtrar(alternativasFilter);
+	}
+	
+	@GetMapping("/serie")
+	public List<Alternativas> buscar(Alternativas ovo) {
+		return alternativasRepository.buscar(ovo);
 	}
 	
 	@GetMapping(params="resumo")
@@ -63,7 +73,7 @@ public class AlternativasResource {
 	}
 	
 
-	@GetMapping(params="series")
+	@GetMapping(params="tipo")
 	public Page<MostrarSeries> series(AlternativasFilter alternativasFilter, Pageable pageable) {
 		return alternativasRepository.series(alternativasFilter, pageable);
 	}
@@ -71,7 +81,6 @@ public class AlternativasResource {
 	
 	
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALTERNATIVAS')")
 	public ResponseEntity<Alternativas> criar(@Valid @RequestBody Alternativas alternativas, HttpServletResponse response) {
 		Alternativas alternativasSalva = alternativasService.criar(alternativas);
 		
@@ -82,7 +91,6 @@ public class AlternativasResource {
 	
 	
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_ALTERNATIVAS')")
 	public ResponseEntity<Alternativas> atualizar(@PathVariable Long codigo, @Valid @RequestBody Alternativas alternativas) {
 		try {
 			
@@ -102,7 +110,6 @@ public class AlternativasResource {
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_ALTERNATIVAS')")
 	public void remover(@PathVariable long codigo) {
 		alternativasService.remover(codigo);
 	}

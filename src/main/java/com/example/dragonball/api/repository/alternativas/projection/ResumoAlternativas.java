@@ -1,5 +1,7 @@
 package com.example.dragonball.api.repository.alternativas.projection;
 
+import com.example.dragonball.api.model.TipoSerie;
+
 public class ResumoAlternativas {
 	
 	private String titulo;
@@ -16,11 +18,13 @@ public class ResumoAlternativas {
 	
 	private String alternativa4;
 	
+	private TipoSerie tipo;
+	
 	
 	
 
 	public ResumoAlternativas(String titulo, String link, String pergunta, String alternativa1, String alternativa2,
-			String alternativa3, String alternativa4) {
+			String alternativa3, String alternativa4, TipoSerie tipo) {
 		this.titulo = titulo;
 		this.link = link;
 		this.pergunta = pergunta;
@@ -28,6 +32,7 @@ public class ResumoAlternativas {
 		this.alternativa2 = alternativa2;
 		this.alternativa3 = alternativa3;
 		this.alternativa4 = alternativa4;
+		this.tipo = tipo;
 	}
 
 	public String getTitulo() {
@@ -84,6 +89,14 @@ public class ResumoAlternativas {
 
 	public void setAlternativa4(String alternativa4) {
 		this.alternativa4 = alternativa4;
+	}
+
+	public TipoSerie getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoSerie tipo) {
+		this.tipo = tipo;
 	}
 	
 	

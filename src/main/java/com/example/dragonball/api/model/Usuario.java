@@ -36,10 +36,11 @@ public class Usuario {
 	
 	private int pontos;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="usuario_permissao", joinColumns = @JoinColumn(name="codigo_usuario"),
-	inverseJoinColumns = @JoinColumn(name="codigo_permissao"))
-	private List<Permissao> permissoes;
+	//@ManyToMany(fetch = FetchType.EAGER)
+	//@JoinTable(name="usuario_permissao", joinColumns = @JoinColumn(name="codigo_usuario"),
+	//inverseJoinColumns = @JoinColumn(name="codigo_permissao"))
+	
+	//private List<Permissao> permissoes;
 
 	public long getCodigo() {
 		return codigo;
@@ -81,13 +82,13 @@ public class Usuario {
 		this.pontos = pontos;
 	}
 
-	public List<Permissao> getPermissoes() {
-		return permissoes;
-	}
+	//public List<Permissao> getPermissoes() {
+		//return permissoes;
+	//}
 
-	public void setPermissoes(List<Permissao> permissoes) {
-		this.permissoes = permissoes;
-	}
+	//public void setPermissoes(List<Permissao> permissoes) {
+		//this.permissoes = permissoes;
+	//}
 
 	@Override
 	public int hashCode() {

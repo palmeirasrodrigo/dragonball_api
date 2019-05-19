@@ -27,7 +27,7 @@ public class AlternativasRepositoryImpl implements AlternativasRepositoryQuery{
 	private EntityManager manager;
 	
 	@Override
-	public Page<Alternativas> filtrar(AlternativasFilter alternativasFilter, Pageable pageable) {
+	public List<Alternativas> filtrar(AlternativasFilter alternativasFilter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Alternativas> criteria = builder.createQuery(Alternativas.class);
 		Root<Alternativas> root = criteria.from(Alternativas.class);
@@ -37,9 +37,36 @@ public class AlternativasRepositoryImpl implements AlternativasRepositoryQuery{
 		criteria.where(predicates);
 		
 		TypedQuery<Alternativas> query = manager.createQuery(criteria);
-		adicionarRestricoesDePaginacao(query, pageable);
-		return new PageImpl<>(query.getResultList(), pageable, total(alternativasFilter)) ;
+		return query.getResultList();
+		
 		}
+	
+	@Override
+	public List<Alternativas> buscar(Alternativas alternativasFilter) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Alternativas> criteria = builder.createQuery(Alternativas.class);
+		Root<Alternativas> root = criteria.from(Alternativas.class);
+		
+		//criar as restrições
+		Predicate[] predicates = criarRestricoes2(alternativasFilter, builder, root);
+		criteria.where(predicates);
+		
+		TypedQuery<Alternativas> query = manager.createQuery(criteria);
+		return query.getResultList();
+		
+		}
+
+	private Predicate[] criarRestricoes2(Alternativas alternativasFilter, CriteriaBuilder builder,
+			Root<Alternativas> root) {
+List<Predicate> predicates = new ArrayList<>();
+		
+		if(alternativasFilter.getTipo() != null) {
+			predicates.add(builder.equal(root.get(Alternativas_.tipo), alternativasFilter.getTipo()));
+		}
+		
+		return predicates.toArray(new Predicate[predicates.size()]);
+
+	}
 
 	@Override
 	public Page<ResumoAlternativas> resumir(AlternativasFilter alternativasFilter, Pageable pageable) {
@@ -50,7 +77,7 @@ public class AlternativasRepositoryImpl implements AlternativasRepositoryQuery{
 				,root.get(Alternativas_.titulo), root.get(Alternativas_.link)
 				,root.get(Alternativas_.pergunta), root.get(Alternativas_.alternativa1)
 				,root.get(Alternativas_.alternativa2),root.get(Alternativas_.alternativa3)
-				,root.get(Alternativas_.alternativa4)));
+				,root.get(Alternativas_.alternativa4), root.get(Alternativas_.tipo)));
 		Predicate[] predicates = criarRestricoes(alternativasFilter, builder, root);
 		criteria.where(predicates);
 		
@@ -81,11 +108,15 @@ public class AlternativasRepositoryImpl implements AlternativasRepositoryQuery{
 		
 		if(alternativasFilter.getSerie() != null) {
 			predicates.add(builder.equal(root.get(Alternativas_.tipo), alternativasFilter.getSerie()));
+			predicates.add(builder.equal(root.get(Alternativas_.episodio), alternativasFilter.getEpisodio()));
+			predicates.add(builder.equal(root.get(Alternativas_.esfera), alternativasFilter.getEsfera()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 	
+		
+		
 	private void adicionarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
 		int paginaAtual = pageable.getPageNumber();
 		int totalRegistrosPorPagina = pageable.getPageSize();

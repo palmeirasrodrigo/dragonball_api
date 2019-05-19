@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class DragonApiProperty {
 	
 
-	private String originPermitida = "http://localhost:8000";
+	private String originPermitida = "*";
 
 	private final Seguranca seguranca = new Seguranca();
 	

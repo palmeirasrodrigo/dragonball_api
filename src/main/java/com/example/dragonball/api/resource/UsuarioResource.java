@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +38,6 @@ public class UsuarioResource {
 	private ApplicationEventPublisher publisher;
 	
 	
-	@PreAuthorize("hasAuthority('ROLE_LISTAR_USUARIOS')")
 	@GetMapping
 	public List<Usuario> listar() {
 		return usuarioRepository.findAll();
@@ -55,7 +53,6 @@ public class UsuarioResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
 	}  
 	
-	@PreAuthorize("hasAuthority('ROLE_LISTAR_USUARIOS')")
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Usuario> buscarPeloCodigo(@PathVariable Long codigo) {
 		 Usuario findOne = usuarioRepository.findOne(codigo);
@@ -63,7 +60,6 @@ public class UsuarioResource {
 				 
 	}
 	
-	@PreAuthorize("hasAuthority('ROLE_DELETAR_USUARIOS')")
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
@@ -71,7 +67,6 @@ public class UsuarioResource {
 	}
 	
 	
-	@PreAuthorize("hasAuthority('ROLE_ATUALIZAR_USUARIOS')")
 	@PutMapping("/{codigo}")
 	public ResponseEntity<Usuario> atualizar(@PathVariable Long codigo, @Valid @RequestBody Usuario usuario) {
 		Usuario usuarioSalvo = usuarioService.atualizar(codigo, usuario);
@@ -80,8 +75,8 @@ public class UsuarioResource {
 	
 	@PutMapping("/{codigo}/pontos")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<Usuario> atualizarPontos(@PathVariable Long codigo, @RequestBody int pontos) {
-		Usuario usuarioSalvo = usuarioService.atualizarPontos(codigo, pontos);
+	public ResponseEntity<Usuario> atualizarPontos(@PathVariable Long codigo, @RequestBody Usuario pontos) {
+		Usuario usuarioSalvo = usuarioService.atualizarPontos(codigo, pontos.getPontos());
 		return ResponseEntity.ok(usuarioSalvo);
 	}
 }

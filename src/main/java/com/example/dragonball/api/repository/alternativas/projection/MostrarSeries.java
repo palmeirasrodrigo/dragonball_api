@@ -6,9 +6,7 @@ public class MostrarSeries {
 	
 	private TipoSerie serie;
 
-	public MostrarSeries(TipoSerie serie) {
-		this.serie = serie;
-	}
+	
 
 	public TipoSerie getSerie() {
 		return serie;

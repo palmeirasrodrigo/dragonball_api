@@ -29,7 +29,7 @@ public class AlternativasServiceImpl implements AlternativasService {
 
 	@Override
 	public Page<Alternativas> listar(AlternativasFilter lancamentoFilter, Pageable pageable) {		
-		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
+		return lancamentoRepository.findAll(pageable);
 	}
 
 	@Override
@@ -53,19 +53,19 @@ public class AlternativasServiceImpl implements AlternativasService {
 	}
 
 	public Alternativas salvar(Alternativas lancamento) {
-		Usuario pessoa = pessoaService.buscarPeloCodigo(lancamento.getUsuario().getCodigo());
-		if (pessoa == null) {
-			throw new PessoaInexistenteOuInativaException();
-		}
+		//Usuario pessoa = pessoaService.buscarPeloCodigo(lancamento.getUsuario().getCodigo());
+		//if (pessoa == null) {
+			//throw new PessoaInexistenteOuInativaException();
+		//}
 
 		return lancamentoRepository.save(lancamento);
 	}
 	
 	public Alternativas atualizar(Long codigo, Alternativas lancamento) {
 		Alternativas lancamentoSalvo = buscarLancamentoExistente(codigo);
-		if(!lancamento.getUsuario().equals(lancamento.getUsuario())) {
-			pessoaService.validarPessoa(lancamento.getUsuario());
-		}
+		//if(!lancamento.getUsuario().equals(lancamento.getUsuario())) {
+			//pessoaService.validarPessoa(lancamento.getUsuario());
+		//}
 		
 		BeanUtils.copyProperties(lancamento, lancamentoSalvo, "codigo");
 		
